@@ -1,0 +1,29 @@
+
+<body>
+    <form class="border border-light p-5">
+
+    <p class="h4 mb-4 text-center">New Project</p>
+
+    <label for="textInput">Name of Project</label>
+    <input type="text" id="name" class="form-control mb-4" placeholder="Name">
+    <label for="name" id="invalid-name"></label>
+    <br>
+      <label for="textInput">Access type of project</label>
+    <select class="browser-default custom-select mb-4" id="select">
+        <option value="" disabled="true" selected="">Choose your option</option>
+        <option value="Public">Public</option>
+        <option value="Private">Private</option>
+    </select>
+    <label for="select" id="invalid-select"></label>
+    <div>
+        <p id="error" style="color: red;"></p>
+    </div>
+    <button class="btn btn-info btn-block my-4" type="button" onclick="validateproject()">Create</button>
+
+</form>
+
+</body>
+
+<script>
+    
+</script>

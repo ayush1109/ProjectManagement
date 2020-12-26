@@ -1,0 +1,109 @@
+<body>
+    <form class="border border-light p-5">
+
+    <p class="h4 mb-4 text-center">Add Members</p>
+
+    <label for="textInput">Email-id</label>
+    <input type="email" id="email" class="form-control mb-4" placeholder="Email"> <i class="fas fa-plus-square fa-2x" onclick="validate()" style="color: blue; cursor: pointer;"></i>
+    <label for="email" id="invalid-email"></label>
+
+        <button class="btn btn-info btn-block my-4" type="button" onclick="invite()">Add Members</button>
+
+    </form>
+    
+    <h2>Candidates list</h2>
+
+    <div id="list"></div>
+
+    <script>
+        let candidates = []
+        function validate() {
+            let email = document.getElementById("email").value;
+
+            // valid email
+            if (email == "") {
+               document.getElementById('invalid-email').innerHTML = "Please enter a email"
+               document.getElementById('invalid-email').style.color = "red"
+               document.getElementById('email').focus()
+            }
+            else {
+                var regex = /^\S+@\S+\.\S+$/;
+                if (regex.test(email) === false) {
+                    document.getElementById('invalid-email').innerHTML = "Please enter a valid email"
+                    document.getElementById('invalid-email').style.color = "red"
+                    document.getElementById('email').focus()
+                } 
+            else {
+                addElement()
+            }
+        }
+        }
+
+        function addElement() {
+            hideError()
+            if (candidates.indexOf(document.getElementById('email').value) < 0) {
+                candidates.push(document.getElementById('email').value);
+                document.getElementById('email').value = ''
+                disp();
+            }
+            else {
+                let p = document.getElementById("invalid-email")
+                p.innerText = "You already entered this email"
+                
+                return
+            }
+        };
+
+        function deleteElement(index) {
+            hideError()
+            candidates.splice(index, 1)
+            disp()
+        };
+
+         function disp() {
+            let str = ''
+            for (i = 0; i < candidates.length; i++) {
+                str += '<div class="row row-border my-row text-center align-items-center"><div class="col-3 col-border" id="list"><input type="email" value="' + candidates[i] + '" readonly></div><div class="col-1 col-border"><i class="fas fa-times fa-2x" onclick="deleteElement(' + candidates.indexOf(candidates[i]) + ')" style="color: blue; cursor: pointer;"></i></div></div>';
+            }
+            document.getElementById('list').innerHTML = str;
+        }; 
+
+         function hideError() {
+            let div = document.getElementById("invalid-email")
+            if (div.childNodes[0]) {
+                div.classList.remove("alert", "alert-danger")
+                div.removeChild(div.childNodes[0])
+            }
+        }
+
+        function invite(){
+            if (candidates.length == 0) {
+                let p = document.getElementById("invalid-email")
+                p.innerText = "Please add email ids of candidates."
+                
+                return
+            }
+            var xmlHttpRequest = new XMLHttpRequest()
+            xmlHttpRequest.open("POST", `/api/owner/invite/{{name}}`, true)
+            xmlHttpRequest.setRequestHeader("Content-Type", "application/json")
+            xmlHttpRequest.setRequestHeader("authorization", getCookie("authorization"));
+            xmlHttpRequest.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        console.log("members added")
+                        window.location = "/ownerhomepage2/{{name}}"
+                        alert("Members Added")
+                    }
+                    else {
+                        let p = document.getElementById("invalid-email")
+                        p.innerText = JSON.parse(this.responseText).message
+                       
+                    }
+                }
+            }
+            xmlHttpRequest.send(JSON.stringify({ candidates: candidates }))           
+        }
+
+    </script>
+</body>
+

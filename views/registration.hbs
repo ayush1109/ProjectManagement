@@ -1,0 +1,45 @@
+
+<body>
+	
+	<div class="wrapper">
+		<div class="inner">
+			<img src="/images/image1.png" alt="" class="image-1">
+			<form>
+				<h3>Register as Employee</h3>
+				<div class="form-holder">
+					<span class="lnr lnr-user"></span>
+					<input type="text" id="name" class="form-control" placeholder="Username" required>
+					<label for="name" id="invalid-name"></label>
+				</div>
+
+				<div class="form-holder">
+					<span class="lnr lnr-envelope"></span>
+					<input type="email" id="email" class="form-control" placeholder="Mail" required>
+					<label for="email" id="invalid-email"></label>
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-lock"></span>
+					<input type="password" id="password" class="form-control" placeholder="Password" required>
+					<label for="password" id="invalid-pass"></label>
+				</div>
+				<p hidden id="isOwner">{{isOwner}}</p>
+
+				<button onclick="registervalidate()" type="button">
+					<span>Register</span>
+				</button>
+
+				
+				<div>
+					<p style="color: red;" id="error"></p>
+				</div>
+				<div>
+					<p style="color: green;" id="message"></p>
+				</div>
+			</form>
+			<img src="/images/image2.png" alt="" class="image-2">
+		</div>
+
+	</div>
+
+
+</body>

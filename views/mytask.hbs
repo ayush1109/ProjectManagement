@@ -1,0 +1,42 @@
+
+<body>
+    <div class="container">
+    <form class="border border-light p-5">
+
+    <p class="h4 mb-4 text-center">New Task</p>
+
+    <label for="textInput">Task Name</label>
+    <input type="text" id="tname" class="form-control mb-4" placeholder="Name">
+    <label for="tname" id="invalid-tname"></label><br>
+
+      <label for="textInput">Description</label>
+        <input type="text" id="desc" class="form-control mb-4" placeholder="Description">
+        <label for="desc" id="invalid-desc"></label><br>
+
+    <label for="textInput">Notes</label>
+        <input type="text" id="note" class="form-control mb-4" placeholder="Note(if any)">
+         <label for="note" id="invalid-note"></label><br>
+
+     <label for="textInput">Deadline</label>
+        <input type="date" id="dueDate" class="form-control mb-4" placeholder="Due Date">
+         <label for="dueDate" id="invalid-dueDate"></label><br>
+
+
+     <label for="textInput">Assigned to</label>
+     
+    <input type="text" id="assigned" class="form-control mb-4" value="Me" disabled>
+    
+
+    <div>
+        <p id="error" style="color: red;"></p>
+    </div>
+    <button class="btn btn-info btn-block my-4" type="button" onclick="validateMytask()">Create</button>
+
+    <p style="color: red;" id="error"></p>
+</form>
+</div>
+</body>
+
+<script>
+   
+</script>
